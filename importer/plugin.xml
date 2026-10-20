@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension id="importer" point="org.eclipse.core.runtime.applications">
+    <application visible="true"><run class="importer.Importer"/></application>
+  </extension>
+</plugin>

@@ -1,0 +1,38 @@
+name: build
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 26
+      - run: java build/Build.java
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fearless_setup_${{ runner.os }}
+          path: out/dist/*
+      - if: github.ref == 'refs/heads/main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view setup > /dev/null 2>&1 || gh release create setup --title "Setup" --notes "The setup program of the last push to main." || true
+          gh release upload setup out/dist/* --clobber
+      - if: github.ref != 'refs/heads/main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view test > /dev/null 2>&1 || gh release create test --prerelease --title "Test" --notes "The setup program of the last push to a branch other than main." || true
+          gh release upload test out/dist/* --clobber

@@ -27,10 +27,10 @@ final class Fetch{
   }
   static final boolean windows= System.getProperty("os.name").startsWith("Windows");
   static final Download jdk= windows
-    ? new Download("https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2%2B10/OpenJDK26U-jdk_x64_windows_hotspot_26.0.2_10.zip",
-      "0b532502e29a5d2babe608069f6df2423ae5e1aa714b715b560217cf8c6ce8ff")
-    : new Download("https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2%2B10/OpenJDK26U-jdk_x64_linux_hotspot_26.0.2_10.tar.gz",
-      "56f768372f6ca1e2eb4c5f46b78f627949e8dcfe9c9723926cf45a45faf35802");
+    ? new Download("https://download.oracle.com/java/26/archive/jdk-26.0.2_windows-x64_bin.zip",
+      "530c20885a96d97c5f982a96e2d9e6aa41956c414b4a7398c49df7fe3192e62d")
+    : new Download("https://download.oracle.com/java/26/archive/jdk-26.0.2_linux-x64_bin.tar.gz",
+      "11de2bce72e7f07b9e80afa9bdd950b42f3a5c69cf4969e44389d50f466959e2");
   static final Download eclipse= windows
     ? new Download("https://download.eclipse.org/technology/epp/downloads/release/2026-06/R/eclipse-java-2026-06-R-win32-x86_64.zip",
       "aa03a8488b1a4abc441611e52984269f6db23969dc5c29c057092fe19c8b83b2")
